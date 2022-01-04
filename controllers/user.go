@@ -28,6 +28,7 @@ func (u UserController) GetUserById(c *gin.Context) {
 	id := c.Param("id")
 	if id == "" {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "Bad request"})
+		return
 	}
 
 	user, err := userModel.GetByID(id)
@@ -38,6 +39,7 @@ func (u UserController) GetUserById(c *gin.Context) {
 
 	if user == nil {
 		c.JSON(http.StatusNotFound, gin.H{"message": "User not found"})
+		return
 	}
 
 	c.JSON(http.StatusOK, user)
